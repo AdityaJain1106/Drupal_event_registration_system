@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function event_reg_schema() {
+  $schema['event_reg_event_config'] = [
+    'description' => 'Stores event configuration data.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'registration_start_date' => [
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+      ],
+      'registration_end_date' => [
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+      ],
+      'event_date' => [
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+      ],
+      'event_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'category' => [
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  $schema['event_reg_registrations'] = [
+    'description' => 'Stores event registrations.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'full_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'college_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'department' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ],
+      'category' => [
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+      ],
+      'event_date' => [
+        'type' => 'varchar',
+        'length' => 20,
+        'not null' => TRUE,
+      ],
+      'event_id' => [
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+}

@@ -1,0 +1,12 @@
+services:
+  event_reg.event_repository:
+    class: Drupal\event_reg\Service\EventRepository
+    arguments: ['@database']
+
+  event_reg.registration_repository:
+    class: Drupal\event_reg\Service\RegistrationRepository
+    arguments: ['@database']
+
+  event_reg.notification_service:
+    class: Drupal\event_reg\Service\NotificationService
+    arguments: ['@plugin.manager.mail', '@config.factory']

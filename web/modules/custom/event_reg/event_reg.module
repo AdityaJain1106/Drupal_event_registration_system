@@ -1,0 +1,29 @@
+<?php
+
+use Drupal\Core\Mail\MailFormatHelper;
+
+/**
+ * Implements hook_mail().
+ */
+function event_reg_mail($key, &$message, $params) {
+  $p = $params['payload'];
+
+  $message['subject'] = match ($key) {
+    'user_confirmation' => 'Registration Confirmation',
+    'admin_notification' => 'New Event Registration',
+    default => 'Event Registration',
+  };
+
+  $body = [];
+  $body[] = "Name: {$p['name']}";
+  $body[] = "Email: {$p['email']}";
+  $body[] = "Category: {$p['category']}";
+  $body[] = "Event Date: {$p['event_date']}";
+  $body[] = "Event Name: {$p['event_name']}";
+  $body[] = "College: {$p['college_name']}";
+  $body[] = "Department: {$p['department']}";
+  $body[] = "";
+  $body[] = "Thank you.";
+
+  $message['body'][] = MailFormatHelper::wrapMail(implode("\n", $body));
+}

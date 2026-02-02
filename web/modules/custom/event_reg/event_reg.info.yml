@@ -1,0 +1,5 @@
+name: Event Registration
+type: module
+description: Event registration system (no contrib) with DB storage, validation, mail, admin listing, CSV export.
+core_version_requirement: ^10
+package: Custom
