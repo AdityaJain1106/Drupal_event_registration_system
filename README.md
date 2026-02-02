@@ -1,163 +1,145 @@
-# Event Registration System – Custom Drupal Module
-
-## Overview
-This project is a custom **Event Registration System** developed as a Drupal custom module.
-It allows administrators to configure events and users to register for them through a public form.
-All registrations are stored in custom database tables and email notifications are sent to both users and administrators.
 
 ---
 
-## Drupal Version
-- Drupal Core: **10.x**
+## 📑 Table of Contents
+- [About The Project](#about-the-project)
+- [Built With](#built-with)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Module Functionality](#module-functionality)
+- [Installation](#installation)
+- [Usage](#usage)
+- [URLs](#urls)
+- [Permissions](#permissions)
+- [Screenshots](#screenshots)
+- [Author](#author)
 
 ---
 
-## Module Location
-web/modules/custom/event_reg
+## 📘 About The Project
 
+The **Event Registration System** is a **fully custom Drupal 10 module** that enables creation of events, user registrations, admin monitoring, and CSV export. It uses **custom database tables, AJAX forms, mail API, Dependency Injection, and Drupal coding standards**.
 
----
-
-## Functional Features
-
-### 1. Event Configuration (Admin)
-Administrators can configure events with:
-- Event Registration Start Date
-- Event Registration End Date
-- Event Date
-- Event Name
-- Event Category
-  - Online Workshop
-  - Hackathon
-  - Conference
-  - One-day Workshop
-
-Configured events control availability on the registration form.
+This module avoids contributed modules and relies only on **core APIs**, making it lightweight and efficient.
 
 ---
 
-### 2. Event Registration Form (Public)
-- Accessible only during the configured registration period
-- Uses **AJAX-based dependent dropdowns**
+## 🛠️ Built With
 
-**Form Fields**
-- Full Name (required)
-- Email Address (required)
-- College Name (required)
-- Department (required)
-- Category (dropdown – AJAX)
-- Event Date (dropdown – AJAX)
-- Event Name (dropdown – AJAX)
+This project is built using:
 
----
-
-### 3. Validation Rules
-- Email format validation
-- Special characters are not allowed in text fields
-- Duplicate registration prevention using: Email + Event
-- User-friendly validation messages
+- **Drupal 10 Core**
+- **Drupal Form API**
+- **Drupal AJAX API**
+- **Drupal Database API**
+- **Drupal Config API**
+- **Drupal Mail API**
+- **Custom Module + PSR-4 Autoloading**
 
 ---
 
-### 4. Data Storage
+## ⭐ Features
+
+### 🎯 1. Event Configuration (Admin)
+Admins can configure:
+- Registration Start & End Dates  
+- Event Date  
+- Event Name  
+- Category  
+  - Online Workshop  
+  - Hackathon  
+  - Conference  
+  - One-day Workshop  
+
+Event configuration controls **form availability**.
+
+---
+
+### 📝 2. Event Registration (Public Form)
+Includes:
+- Full Name  
+- Email  
+- College Name  
+- Department  
+- Category (AJAX)  
+- Event Date (AJAX)  
+- Event Name (AJAX)
+
+Form accessible only during registration window.
+
+---
+
+### 🔒 3. Validations
+- Email format validation  
+- No special characters in text fields  
+- Duplicate prevention (Email + Event)  
+- Clean, user-friendly messages  
+
+---
+
+### 💾 4. Custom Database Tables
 
 #### Event Configuration Table
-Stores event configuration details:
-- ID
-- Registration Start Date
-- Registration End Date
-- Event Date
-- Event Name
-- Category
+Stores:
+- ID  
+- Registration Dates  
+- Event Date  
+- Category  
+- Event Name  
 
-#### Event Registration Table
-Stores user registrations:
-- ID
-- Event ID (foreign key)
-- Full Name
-- Email
-- College Name
-- Department
-- Category
-- Event Date
-- Created Timestamp
+#### Event Registrations Table
+Stores:
+- Name  
+- Email  
+- College  
+- Department  
+- Category  
+- Event Date  
+- Timestamp  
 
 ---
 
-### 5. Email Notifications
-Emails are sent using **Drupal Mail API**.
+### 📧 5. Email Notifications
+Sent via **Drupal Mail API**.
 
-**Recipients**
-- Registered User
-- Administrator (configurable)
-
-**Email Content**
-- Name
-- Event Date
-- Event Name
-- Category
+- Confirmation email to user  
+- Notification email to admin (configurable)  
 
 ---
 
-### 6. Admin Configuration Page
-Administrators can manage:
-- Admin notification email address
-- Enable / Disable admin notifications
+### ⚙️ 6. Admin Configuration Page
+Admins can:
+- Update notification email  
+- Enable/Disable admin email alerts  
 
-Configuration uses **Drupal Config API** with no hard-coded values.
-
----
-
-### 7. Admin Listing Page
-Accessible only to users with a custom permission.
-
-**Features**
-- Filter registrations by Event Date
-- Filter Event Names based on selected date (AJAX)
-- Display total participant count
-- Display registration details in tabular format
-- Export registrations as CSV
-
-**Displayed Columns**
-- Name
-- Email
-- Event Date
-- College Name
-- Department
-- Submission Date
+Uses **Drupal Config API** — no hardcoded values.
 
 ---
 
-## URLs
+### 📊 7. Admin Registration Listing
+Custom permission-protected page.
 
-| Feature | URL |
-|------|-----|
-| Event Configuration | `/admin/config/event-reg` |
-| Event Registration Form | `/event-register` |
-| Admin Registration Listing | `/admin/reports/event-registrations` |
+Features:
+- Filter by Event Date  
+- Dynamic (AJAX) Event Name filter  
+- Total participant count  
+- CSV Export  
+- Tabular listing  
 
----
-
-## Permissions
-Custom permission: view event registrations
-
-Only users with this permission can access the admin listing page.
-
----
-
-## Technical Implementation
-- Custom module (no contributed modules)
-- PSR-4 autoloading
-- Dependency Injection (no `\Drupal::service()` in business logic)
-- Drupal Form API
-- Drupal Database API
-- Drupal Mail API
-- AJAX callbacks for dependent dropdowns
-- Drupal coding standards followed
+Columns:
+- Name  
+- Email  
+- Event Date  
+- College  
+- Department  
+- Submission Date  
 
 ---
 
-## Repository Structure
+## 📂 Project Structure
+
+```
+
 event-registration-system/
 ├── composer.json
 ├── composer.lock
@@ -178,30 +160,65 @@ event-registration-system/
 ├── Form/
 └── Service/
 
----
-
-## Installation Steps
-1. Clone the repository
-2. Place the module inside: web/modules/custom/event_reg
-3. Import `event_reg.sql` into the Drupal database
-4. Enable the module from **Admin → Extend**
-5. Rebuild cache: /core/rebuild.php
+```
 
 ---
 
-## Status
-- All required features implemented
-- Forms working as expected
-- Data stored in custom tables
-- Email notifications working
-- AJAX functionality implemented
-- CSV export implemented
-- Ready for submission
+## ⚙️ Installation
+
+1. Clone the repository  
+2. Move module into:  
+   `web/modules/custom/event_reg`
+3. Import DB tables using:  
+   `event_reg.sql`
+4. Enable module in **Admin → Extend**
+5. Rebuild cache:  
+   `/core/rebuild.php`
 
 ---
 
-## Author
-**Pranav Singal**
+## 🚀 Usage
+
+### For Admins
+- Configure events  
+- Manage settings  
+- View registrations  
+- Export CSV  
+
+### For Users
+- Access: `/event-register`
+- Register for available events  
+
+---
+
+## 🔗 URLs
+
+| Feature | URL |
+|--------|------|
+| Event Configuration | `/admin/config/event-reg` |
+| Event Registration Form | `/event-register` |
+| Admin Registration Listing | `/admin/reports/event-registrations` |
+
+---
+
+## 🔐 Permissions
+
+Custom permission:
+```
+
+view event registrations
+
+```
+
+Required to access admin registration listing page.
+
+---
 
 
 
+## 👤 Author
+**Aditya Jain**  
+Full-stack Developer | Open-Source Contributor  
+LinkedIn: *[add link here](https://www.linkedin.com/in/adddijain/)*
+
+```
